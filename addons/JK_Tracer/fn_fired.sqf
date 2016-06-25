@@ -2,6 +2,9 @@ params ["_obj", "", "", "", "_ammo", "", "_proj"];
 // dafug what Project Fly over 4 km that use Tracer
 if (((positionCameraToWorld [0,0,0]) distance _obj) > 4000) exitWith {};
 
+private _ambLight = (sunOrMoon * sunOrMoon * (1 - overcast * 0.25) + (moonIntensity / 5) * (1 - overcast)) min 1;
+if (((sunOrMoon * sunOrMoon * (1 - overcast * 0.25) + (moonIntensity / 5) * (1 - overcast)) min 1) >= 0.83) exitWith {};
+
 // fall back if Projectile is Null
 if (isNull _proj) then {
     _proj = nearestObject [_obj,_ammo];
