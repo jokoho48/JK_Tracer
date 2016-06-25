@@ -1,12 +1,3 @@
-////////////////////////////////////////////////////////////////////
-//DeRap: Produced from mikero's Dos Tools Dll version 5.24
-//Produced on Sat Nov 27 18:04:30 2010 : Created on Sat Nov 27 18:04:30 2010
-//http://dev-heaven.net/projects/list_files/mikero-pbodll
-////////////////////////////////////////////////////////////////////
-
-#define _ARMA_
-
-//Class bd_tracer : config.bin{
 class CfgPatches {
     class JK_Tracer {
         units[] = {};
@@ -119,11 +110,3 @@ class CfgWeapons {
     };
 };
 */
-class Extended_FiredBIS_EventHandlers {
-    class All {
-        class JK_Tracer {
-            clientFiredBIS = "_this call JK_Tracer_fnc_tracer;";
-        };
-    };
-};
-//};
