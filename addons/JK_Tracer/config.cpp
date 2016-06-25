@@ -21,10 +21,7 @@ class CfgFunctions {
     class JK_Tracer {
         class tracer {
             file = "\JK_Tracer";
-            class getTracerData {};
-            class isTracer {};
-            class tracer {};
-            class deleteLight {};
+            class init { postInit = 1; };
         };
     };
 };

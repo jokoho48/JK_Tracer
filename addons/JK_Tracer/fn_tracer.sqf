@@ -18,9 +18,10 @@ _params params ["_tracerScale", "_tracerStartTime", "_tracerEndTime", "_tracerCo
 if (_nvgOnly == 1) then {_tracerColor = [0.05,0.05,0.05,0.9]};
 
 private _tracerAlpha = _tracerColor select 3;
+_tracerColor = +_tracerColor;// fuck that i need to find a better method for this
 _tracerColor resize 3;
 
-private _amb = _tracerScale * 0.007;
+private _amb = _tracerScale * 0.07;
 
 if (_tracerStartTime >= 0) then {
 
@@ -29,15 +30,17 @@ if (_tracerStartTime >= 0) then {
     _light lightAttachObject [_proj, [0, 0, 0]];
     _light setLightColor _tracerColor;
     _light setLightAmbient [
-        (_tracerColor select 0)*_amb,
-        (_tracerColor select 1)*_amb,
-        (_tracerColor select 2)*_amb
+        (_tracerColor select 0) * _amb,
+        (_tracerColor select 1) * _amb,
+        (_tracerColor select 2) * _amb
     ];
+
+    JK_Tracer_allTracer pushBack [_light, _proj];
 
     if (_tracerStartTime > 0.05) then {
         _light setLightBrightness 0;
     } else {
-        private _tracerBrightness = 0.06 - 0.005 + random(0.01);
+        private _tracerBrightness = 0.06 - 0.005 + random (0.01);
         _light setLightBrightness (_tracerScale * _tracerBrightness * _tracerAlpha * 0.65) * 250;
         diag_log (_tracerScale * _tracerBrightness * _tracerAlpha * 0.65) * 250;
     };
