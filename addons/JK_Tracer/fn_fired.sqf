@@ -2,8 +2,7 @@ params ["_obj", "", "", "", "_ammo", "", "_proj"];
 // dafug what Project Fly over 4 km that use Tracer
 if (((positionCameraToWorld [0,0,0]) distance _obj) > 4000) exitWith {};
 
-private _ambLight = (sunOrMoon * sunOrMoon * (1 - overcast * 0.25) + (moonIntensity / 5) * (1 - overcast)) min 1;
-if (((sunOrMoon * sunOrMoon * (1 - overcast * 0.25) + (moonIntensity / 5) * (1 - overcast)) min 1) >= 0.83) exitWith {};
+if (JK_AmbientData >= 0.83) exitWith {};
 
 // fall back if Projectile is Null
 if (isNull _proj) then {
@@ -28,7 +27,6 @@ private _amb = _tracerScale * 0.07;
 
 if (_tracerStartTime >= 0) then {
 
-    diag_log "Create Light Source";
     private _light = "#lightpoint" createVehicleLocal (getPos _proj);
     _light lightAttachObject [_proj, [0, 0, 0]];
     _light setLightColor _tracerColor;
@@ -45,7 +43,6 @@ if (_tracerStartTime >= 0) then {
     } else {
         private _tracerBrightness = 0.06 - 0.005 + random (0.01);
         _light setLightBrightness (_tracerScale * _tracerBrightness * _tracerAlpha * 0.65) * 250;
-        diag_log (_tracerScale * _tracerBrightness * _tracerAlpha * 0.65) * 250;
     };
 
     _params set [4, _tracerAlpha];

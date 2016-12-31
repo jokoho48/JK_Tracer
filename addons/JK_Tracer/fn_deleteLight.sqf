@@ -16,10 +16,8 @@ if (alive _proj && !isNull _light) then {
     }, {
         params ["", "_light"];
         deleteVehicle _light;
-        diag_log "Delete Light Source After Time";
     }, _this] call CBA_fnc_waitUntilAndExecute;
 
 } else {
-    diag_log "Delete Light Source Instante";
     deleteVehicle _light;
 };

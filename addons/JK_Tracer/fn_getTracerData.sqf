@@ -18,9 +18,36 @@ if (isNil "_return") then {
     if (isNumber (_ammoConfig >> "tracerEndTime")) then {
         _tracerEndTime = getNumber (_ammoConfig >> "tracerEndTime");
     };
-    private _tracerColor = [0, 1, 0, 0];
+
+
+    private _tracerCfg = (_ammoConfig >> "tracerColor");
+    private _tracerColor = switch (true) do {
+        case (isArray _tracerCfg): {
+            getArray (_tracerCfg);
+        };
+        case (isText _tracerCfg): {
+            JK_Tracer_colorData getVariable (getText (_tracerCfg));
+        };
+        default {
+            private _temp = _ammo call JK_Tracer_fnc_find;
+            if !(isNil "_temp") exitWith { _temp; };
+            private _modelName = getText (_ammoConfig >> "model");
+            _modelName = toLower(_modelName) splitString "\.";
+            private _modelcount = (count _modelName) - 1;
+            _modelName = _modelName select _modelcount;
+            if (_modelName == "p3d") then {
+                _modelName = _modelName select (_modelcount - 1);
+            };
+            _temp = _ammo call JK_Tracer_fnc_find;
+            if !(isNil "_temp") exitWith { _temp; };
+            [0, 1, 0, 0];
+        };
+    };
+
     if (isArray (_ammoConfig >> "tracerColor")) then {
         _tracerColor = getArray (_ammoConfig >> "tracerColor");
+    } else {
+        if () then {}
     };
     private _nvgOnly = 0;
     if (isNumber (_ammoConfig >> "nvgOnly")) then {
