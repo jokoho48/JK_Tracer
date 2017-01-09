@@ -1,12 +1,13 @@
-params ["_obj", "", "", "", "_ammo", "", "_proj"];
+params ["_proj", "_weapon", "", "", "_ammo", "", "_proj"];
+if (toLower(_weapon) isEqualTo "put") exitWith {};
 // dafug what Project Fly over 4 km that use Tracer
-if (((positionCameraToWorld [0,0,0]) distance _obj) > 4000) exitWith {};
+if (((positionCameraToWorld [0,0,0]) distance _proj) > 4000) exitWith {};
 
 if (JK_AmbientData >= 0.83) exitWith {};
 
 // fall back if Projectile is Null
 if (isNull _proj) then {
-    _proj = nearestObject [_obj,_ammo];
+    _proj = nearestObject [_proj,_ammo];
     _this set [6, _proj];
 };
 
