@@ -1,1 +1,0 @@
-call compile preProcessFileLineNumbers "fn_init.sqf";
