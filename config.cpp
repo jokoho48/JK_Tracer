@@ -17,9 +17,9 @@ class CfgFunctions {
     };
 };
 
-#define RED tracerColor[] = {0.8,0.1,0.15,0.95}
-#define GREEN tracerColor[] = {0.1,0.7,0.1,0.9}
-#define YELLOW tracerColor[] = {0.3,0.9,0.2,0.95}
+#define RED tracerColor[] = {0.8,0.1,0.15,0.7}
+#define GREEN tracerColor[] = {0.1,0.8,0.1,0.7}
+#define YELLOW tracerColor[] = {0.8,0.8,0.2,0.7}
 class CfgAmmo {
     class BulletBase;
     class ShellBase;

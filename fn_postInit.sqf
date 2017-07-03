@@ -1,4 +1,4 @@
-
+if (!hasInterface) exitWith {};
 // define Global Variables
 JK_Tracer_allTracer = [];
 
@@ -20,5 +20,10 @@ JK_Tracer_fnc_cachedIsTracer = compile preprocessFileLineNumbers "\JK\JK_Tracer\
     };
 }] call CBA_fnc_addPerFrameHandler;
 
+JK_Tracer_fnc_getAmbientData = {
+    JK_AmbientData = (sunOrMoon * sunOrMoon * (1 - overcast * 0.25) + (moonIntensity / 5) * (1 - overcast)) min 1;
+    [{call JK_Tracer_fnc_getAmbientData;}, [], 10] call CBA_fnc_waitAndExecute;
+};
+call JK_Tracer_fnc_getAmbientData;
 
 ["All", "fired", {_this call JK_Tracer_fnc_fired}] call CBA_fnc_addClassEventHandler;

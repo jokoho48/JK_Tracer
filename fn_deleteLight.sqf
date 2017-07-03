@@ -5,7 +5,6 @@ _params params ["_scale", "_startTime", "_endTime", "_color", "_alpha"];
 if (alive _proj && !isNull _light) then {
 
     private _brightness = (0.05 - 0.005) + random 0.01;
-    diag_log (((_scale * _brightness) * _alpha) * 0.65) * 250;
     _light setLightBrightness (((_scale * _brightness) * _alpha) * 0.65) * 250;
     [{
         params ["_proj", "", "_params", "_initTime"];
@@ -16,10 +15,8 @@ if (alive _proj && !isNull _light) then {
     }, {
         params ["", "_light"];
         deleteVehicle _light;
-        diag_log "Delete Light Source After Time";
     }, _this] call CBA_fnc_waitUntilAndExecute;
 
 } else {
-    diag_log "Delete Light Source Instante";
     deleteVehicle _light;
 };

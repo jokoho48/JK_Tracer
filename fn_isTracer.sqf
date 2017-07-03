@@ -1,17 +1,8 @@
 scopeName "isTracerMain";
 
-params ["_veh", "_weap", "_muzzle", "_mode", "", "_magazine"];
+params ["_veh", "_weap", "_muzzle", "_mode", "", "_magazine", "_projectile"];
 
-private _gunner = gunner _veh;
-
-{
-    if (((assignedVehicleRole _x) select 0) != "CARGO") then {
-        if (currentMuzzle _X == _muzzle) then {
-            _gunner = _X
-        };
-    };
-    nil
-} count (crew _veh);
+private _gunner = (getShotParents _projectile) select 1;
 
 private _ammoCount = _gunner ammo _muzzle;
 
