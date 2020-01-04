@@ -1,2 +1,5 @@
 /addons/*.pbo
 .hemtt
+keys
+*.pbo
+releases

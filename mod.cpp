@@ -1,3 +1,3 @@
-name = "{{PROJECTNAME}}";
-dir = "@{{PREFIX}}";
-author = "{{AUTHOR}}";
+name = "JK_Tracer";
+dir = "@JK_Tracer";
+author = "joko // Jonas";
