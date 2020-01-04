@@ -1,3 +1,5 @@
+#include "script_component.hpp"
+
 params ["_proj", "_light", "_params", "_initTime"];
 
 _params params ["_scale", "_startTime", "_endTime", "_color", "_alpha"];

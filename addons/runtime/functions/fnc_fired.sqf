@@ -1,9 +1,13 @@
+#include "script_component.hpp"
+
+hintSilent "WEAPON FIRED";
 params ["", "_weapon", "", "", "_ammo", "", "_proj"];
 if (toLower(_weapon) in ["put", "throw"]) exitWith {};
+if (_name isKindOf "BulletCore" || _name isKindOf "ShellCore" || _name isKindOf "SubmunitionCore") exitWith {};
 // dafug what Project Fly over 4 km that use Tracer
 if (((positionCameraToWorld [0,0,0]) distance _proj) > 4000) exitWith {};
 
-if (JK_AmbientData >= 0.83) exitWith {};
+if (GVAR(AmbientData) >= 0.83) exitWith {};
 
 // fall back if Projectile is Null
 if (isNull _proj) then {
@@ -12,19 +16,19 @@ if (isNull _proj) then {
 };
 
 // check if Projectile is a Tracer Projectile
-if !(_this call JK_Tracer_fnc_isTracer) exitWith {};
+if !(_this call FUNC(isTracer)) exitWith {};
 
-private _params = _ammo call JK_Tracer_fnc_getTracerData;
+private _params = _ammo call FUNC(getTracerData);
 _params params ["_tracerScale", "_tracerStartTime", "_tracerEndTime", "_tracerColor", "_nvgOnly"];
 
-if (_nvgOnly == 1) then {_tracerColor = [0.05,0.05,0.05,0.7]};
+if (_nvgOnly == 1) then {_tracerColor = [0.05,0.05,0.05,0.45]};
 
 private _tracerAlpha = _tracerColor select 3;
 _tracerColor = +_tracerColor;// fuck that i need to find a better method for this
 _tracerColor resize 3;
 
-private _amb = _tracerScale * 0.02;
-
+private _amb = _tracerScale * 0.01;
+diag_log format ["Tracer Scale: %1", _tracerScale];
 if (_tracerStartTime >= 0) then {
 
     private _light = "#lightpoint" createVehicleLocal (getPos _proj);
@@ -36,17 +40,16 @@ if (_tracerStartTime >= 0) then {
         (_tracerColor select 2) * _amb
     ];
 
-    JK_Tracer_allTracer pushBack [_light, _proj];
-
+    GVAR(allTracer) pushBack [_light, _proj];
     if (_tracerStartTime > 0.05) then {
         _light setLightBrightness 0;
     } else {
-        private _tracerBrightness = 0.06 - 0.005 + random (0.01);
+        private _tracerBrightness = 0.06 - 0.005 + random (0.001);
         _light setLightBrightness (_tracerScale * _tracerBrightness * _tracerAlpha * 0.65) * 250;
     };
 
     _params set [4, _tracerAlpha];
 
-    [JK_Tracer_fnc_deleteLight, [_proj, _light, _params, time], _tracerStartTime] call CBA_fnc_waitAndExecute;
+    [FUNC(deleteLight), [_proj, _light, _params, time], _tracerStartTime] call CBA_fnc_waitAndExecute;
 
 };

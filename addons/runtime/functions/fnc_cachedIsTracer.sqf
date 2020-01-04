@@ -1,7 +1,9 @@
+#include "script_component.hpp"
+
 params ["_magazine", "_muzzle", "_weap", "_mode"];
 
-private _varName = format ["JK_Tracer_isTracer_%1_%2_%3_%4", _magazine, _muzzle, _weap, _mode];
-private _return = JK_Tracer_configCache getVariable _varName;
+private _varName = format [QGVAR(isTracer_%1_%2_%3_%4), _magazine, _muzzle, _weap, _mode];
+private _return = GVAR(configCache) getVariable _varName;
 if (isNil "_return") then {
     private _magConfig = (configFile >> "CfgMagazines" >> _magazine);
     private _tracersEvery = 3;
@@ -20,6 +22,6 @@ if (isNil "_return") then {
         _mult = getNumber (_modeCfg >> "multiplier");
     };
     _return = [_mult, _lastRoundsTracer, _tracersEvery];
-    JK_Tracer_configCache setVariable [_varName, _return];
+    GVAR(configCache) setVariable [_varName, _return];
 };
 _return
