@@ -1,6 +1,5 @@
 #include "script_component.hpp"
 
-hintSilent "WEAPON FIRED";
 params ["", "_weapon", "", "", "_ammo", "", "_proj"];
 if (toLower(_weapon) in ["put", "throw"]) exitWith {};
 if (_name isKindOf "BulletCore" || _name isKindOf "ShellCore" || _name isKindOf "SubmunitionCore") exitWith {};
@@ -28,7 +27,6 @@ _tracerColor = +_tracerColor;// fuck that i need to find a better method for thi
 _tracerColor resize 3;
 
 private _amb = _tracerScale * 0.01;
-diag_log format ["Tracer Scale: %1", _tracerScale];
 if (_tracerStartTime >= 0) then {
 
     private _light = "#lightpoint" createVehicleLocal (getPos _proj);

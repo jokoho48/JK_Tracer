@@ -5,10 +5,6 @@ GVAR(allTracer) = [];
 
 GVAR(configCache) = call CBA_fnc_createNamespace;
 
-// Compile Functions
-
-hintSilent "Loaded JK_TRACERS";
-// Loop for
 [{
     if ((count GVAR(allTracer)) > 100) then {
         private _entry = GVAR(allTracer) deleteAt 0;
